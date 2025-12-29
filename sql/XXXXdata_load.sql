@@ -1,0 +1,30 @@
+-- Data loading strategy for the Croatian Tourism database
+--
+-- Instance data is populated using a custom Python ETL pipeline.
+-- The pipeline performs the following steps:
+--
+-- 1. Extract raw CSV data from the Croatian Bureau of Statistics (PX-Web format)
+-- 2. Clean and normalize the dataset (remove aggregates, reshape to long format)
+-- 3. Construct dimension tables:
+--    - County
+--    - Country
+--    - Time
+-- 4. Populate the Tourism_Observation fact table
+-- 5. Load time-dependent Schengen membership data from a separate CSV
+--
+-- The ETL pipeline is implemented in:
+--   etl/etl_transform_load.py
+--
+-- This approach was chosen to:
+--   - Handle data cleaning and encoding issues
+--   - Ensure referential integrity
+--   - Automate loading for reproducibility
+--
+-- Row counts after loading:
+--   County: 22
+--   Country: 77
+--   Time: 76
+--   Tourism_Observation: ~93,000
+--   Schengen_Membership: ~2,300
+-- INSERT INTO County (county_name, coastal_flag)
+-- VALUES ('County of Istria', TRUE);

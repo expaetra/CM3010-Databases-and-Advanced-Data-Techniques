@@ -1,0 +1,94 @@
+
+.header {
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
+  padding: 0;
+  background: #8dbad8;
+}
+.header h1 {
+  color: rgb(252, 252, 252);
+  margin: 0;
+  padding: 0;
+  padding-top: 1rem;
+}
+
+.header p {
+  margin-bottom: 0.5rem;
+  padding-bottom: 1rem;
+  color: rgb(240, 240, 240);
+  font-size: 1.2rem;
+}
+
+.dashboard {
+  max-width: 1400px; 
+  margin: 0 auto;
+  padding: 0 24px 80px;
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px; 
+}
+
+.sidebar button {
+  padding: 12px 14px;
+  border: none;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #1d2836;
+  text-align: left;
+  cursor: pointer;
+  font-size: 0.96rem;
+}
+
+.sidebar button:hover {
+  background: #dfe4ec;
+}
+
+.sidebar button.active {
+  background: #628cbd;
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+}
+
+.dashboard .content {
+  flex: 1; 
+  min-width: 720px;
+  margin: 0; 
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.chart-card {
+  width: 100%; 
+  min-width: 720px; 
+}
+
+@media (max-width: 900px) {
+  .dashboard {
+    flex-direction: column;
+  }
+
+  .dashboard .content, .chart-card {
+    min-width: 0;
+  }
+
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .sidebar button {
+    flex: 1 1 48%;
+  }
+}
