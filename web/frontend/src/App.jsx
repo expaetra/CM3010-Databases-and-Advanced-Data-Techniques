@@ -36,7 +36,7 @@ export default function App(){
             Q4 ⬩ Schengen vs. non-Schengen
           </button>
 
-          <button onClick={() => setActiveChart("q5")} assName={activeChart === "q5" ? "active" : ""}>
+          <button onClick={() => setActiveChart("q5")} className={activeChart === "q5" ? "active" : ""}>
             Q5 ⬩ Indexed growth
           </button>
 

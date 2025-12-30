@@ -119,19 +119,15 @@ FROM (
 
 -- ========== Q5: Yearly inland vs coastal arrivals (absolute)
 -- Research question: "Did the post pandemic recovery differ between inland and coastal counties following Croatia's Schengen accession in 2023?"
--- establish the base yearly totals by coastal_flag, 
+-- reuse view form Q2
 -- =========================================================
 CREATE OR REPLACE VIEW vw_inland_coastal_yearly AS
 SELECT
-    t.year AS year,
-    c.coastal_flag AS coastal_flag,
-    CAST(
-        SUM(f.arrivals) AS DECIMAL(12,0)
-        ) AS arrivals
-FROM tourism_observation AS f
-JOIN county AS c ON f.county_id = c.county_id
-JOIN time AS t ON f.time_id = t.time_id
-GROUP BY t.year, c.coastal_flag; 
+    year,
+    coastal_flag,
+    arrivals 
+FROM vw_coastal_yearly_arrivals;
+
 
 -- ========== Q5b: Indexed growth of inland vs. coastal arrivals (baseline 2019) 
 --   2019 is start of the data, also last pre-pandemic tourism year,w hich makes it meaningful to evaluate recovery
