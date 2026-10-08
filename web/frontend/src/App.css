@@ -1,7 +1,6 @@
-
 .header {
   text-align: center;
-  margin-top: 2rem;
+  margin-top: 0;
   margin-bottom: 1.5rem;
   padding: 0;
   background: #8dbad8;
@@ -60,7 +59,8 @@
 
 .dashboard .content {
   flex: 1; 
-  min-width: 720px;
+  min-width: 0;
+  max-width: 960px;
   margin: 0; 
   padding: 0;
   display: flex;
@@ -68,18 +68,21 @@
   gap: 36px;
 }
 
-.chart-card {
-  width: 100%; 
-  min-width: 720px; 
-}
-
 @media (max-width: 900px) {
-  .dashboard {
-    flex-direction: column;
+  .header h1 {
+    font-size: 1.5rem;
+    padding-top: 0.75rem;
   }
 
-  .dashboard .content, .chart-card {
-    min-width: 0;
+  .header p {
+    font-size: 0.95rem;
+    padding: 0 16px 0.75rem;
+  }
+
+  .dashboard {
+    flex-direction: column;
+    padding: 0 12px 40px;
+    gap: 16px;
   }
 
   .sidebar {
@@ -90,5 +93,24 @@
 
   .sidebar button {
     flex: 1 1 48%;
+    font-size: 0.85rem;
+    padding: 10px 10px;
+  }
+
+  .chart-card {
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .chart-card h2 {
+    font-size: 1.15rem;
+  }
+
+  .chart-area {
+    height: min(45vh, 360px);
+  }
+
+  .chart-area--half {
+    height: min(26vh, 220px);
   }
 }

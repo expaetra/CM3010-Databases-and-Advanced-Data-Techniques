@@ -12,7 +12,7 @@ import {
 } from "chart.js";
 
 import { fetchQ3 } from "../api";
-import "./chart.css";
+import "./Chart.css";
 
 ChartJS.register(
   LinearScale,
@@ -63,45 +63,48 @@ export default function Q3Chart() {
         Ratio of foreign to domestic tourist arrivals over time. Values above 1 indicate a higher presence of foreign tourists.
       </p>
 
-      <Line
-        data={chartData}
-        options={{
-          responsive: true,
-          scales: {
-            x: {
-              type: "linear",
-              title: {
-                display: true, 
-                text: "Year"
-              },
-              ticks: {
-                callback: value =>Math.round(value).toString()
-              }
-            },
-            y: {
-              title: {
-                display: true,
-                text: "Foreign / Domestic ratio" 
-              }
-            }
-          },
-          plugins: {
-            tooltip: {
-              callbacks: {
-                title: (items) => {
-                  return `Year: ${Math.round(items[0].parsed.x)}`; 
+      <div className="chart-area">
+        <Line
+          data={chartData}
+          options={{
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              x: {
+                type: "linear",
+                title: {
+                  display: true, 
+                  text: "Year"
                 },
-                label: ctx => {
-                  const value = ctx.parsed.y;
-                  if (value===null) return "Ratio: n/a";
-                  return `Ratio: ${value.toFixed(2)}`;
+                ticks: {
+                  callback: value => Math.round(value).toString()
+                }
+              },
+              y: {
+                title: {
+                  display: true,
+                  text: "Foreign / Domestic ratio" 
                 }
               }
             },
-            legend: { display: false }
-                    } 
-        }}
-      />
+            plugins: {
+              tooltip: {
+                callbacks: {
+                  title: (items) => {
+                    return `Year: ${Math.round(items[0].parsed.x)}`; 
+                  },
+                  label: ctx => {
+                    const value = ctx.parsed.y;
+                    if (value===null) return "Ratio: n/a";
+                    return `Ratio: ${value.toFixed(2)}`;
+                  }
+                }
+              },
+              legend: { display: false }
+            } 
+          }}
+        />
+      </div>
     </section>
   );
 }

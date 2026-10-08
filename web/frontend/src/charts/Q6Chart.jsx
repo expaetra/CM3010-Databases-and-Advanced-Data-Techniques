@@ -11,7 +11,7 @@ import {
 } from "chart.js";
 
 import { fetchQ6 } from "../api";
-import "./chart.css";
+import "./Chart.css";
 
 ChartJS.register(
   CategoryScale,
@@ -21,15 +21,15 @@ ChartJS.register(
   Legend
 );
 
-// convert the SQL returned ration to percentages: summer and non-summer
+// convert the SQL returned ratio to percentages: summer and non-summer
 function ratioToPercentages(ratio) {
   const r = Number(ratio); 
   const summer = (r / (1 + r)) * 100;
-  const nonSummer = (1 / (1 +r)) * 100;
+  const nonSummer = (1 / (1 + r)) * 100;
   return { summer, nonSummer };
 }
 
-// buildt two charts for coastal/inland counties
+// build two charts for coastal/inland counties
 function buildChartData(rows, coastalFlag) {
   const filtered = rows.filter(r => r.coastal_flag === coastalFlag);
   const years = filtered
@@ -75,6 +75,7 @@ export default function Q6Chart() {
 
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     scales: {
       x: {
         stacked: true
@@ -109,14 +110,18 @@ export default function Q6Chart() {
     <section className="chart-card">
       <h2>Seasonal patterns in inland and coastal tourism</h2>
       <p>
-        Seasonality is calculated using the ration of summer and non-summer tourist arrivals. The bars show the percentage share of arrivals in summer months (from June to 
+        Seasonality is calculated using the ratio of summer and non-summer tourist arrivals. The bars show the percentage share of arrivals in summer months (from June to 
         August) and the rest of the year.
       </p>
       <h4>Coastal counties</h4>
-      <Bar data={coastalData} options={options} />
+      <div className="chart-area--half">
+        <Bar data={coastalData} options={options} />
+      </div>
 
       <h4 style={{ marginTop: "1rem" }}>Inland counties</h4>
-      <Bar data={inlandData} options={options} />
+      <div className="chart-area--half">
+        <Bar data={inlandData} options={options} />
+      </div>
     </section>
   );
 }

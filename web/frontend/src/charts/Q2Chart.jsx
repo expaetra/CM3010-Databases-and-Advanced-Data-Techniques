@@ -12,7 +12,7 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { fetchQ2 } from "../api";
-import "./chart.css";
+import "./Chart.css";
 
 ChartJS.register(
   CategoryScale,
@@ -38,7 +38,7 @@ export default function Q2Chart() {
 
     const years = [...new Set(rows.map(r => r.year))].sort((a,b) => a - b);
 
-    // data for coastal and inland counties - SQL returns proportions, connvert to %
+    // data for coastal and inland counties - SQL returns proportions, convert to %
     const coastal = years.map(
       y => rows.find(r => r.year ===y && r.coastal_flag === 1)?.share * 100
     );
@@ -61,7 +61,7 @@ export default function Q2Chart() {
         {
           label: "Inland counties", 
           data: inland,
-          fill: "-1", // Fill green on top for coastal countries share
+          fill: "-1", // Fill green on top for coastal counties share
           backgroundColor: "rgba(35, 189, 104, 0.6)",
           borderColor: "rgba(20, 150, 106, 1)" 
         }
@@ -77,33 +77,36 @@ export default function Q2Chart() {
       <p>
         Share of total tourist arrivals by county type. Values sum to 100% each year.
       </p>
-      <Line
-        data={chartData}
-        options={{
-          responsive: true,
-          scales: {
-            y: {
-              stacked: true,
-              min: 0, 
-              max: 100,
-              ticks: {
-                callback: v => `${v}%` 
+      <div className="chart-area">
+        <Line
+          data={chartData}
+          options={{
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              y: {
+                stacked: true,
+                min: 0, 
+                max: 100,
+                ticks: {
+                  callback: v => `${v}%` 
+                }
+              },
+              x: {
+                stacked: true
               }
-            },
-            x: {
-              stacked: true
-            }
-          }, 
-          plugins: {
-            tooltip: {
-              callbacks: {
-                label: ctx =>
-                  `${ctx.dataset.label}: ${ctx.parsed.y.toFixed(1)}%`  
+            }, 
+            plugins: {
+              tooltip: {
+                callbacks: {
+                  label: ctx =>
+                    `${ctx.dataset.label}: ${ctx.parsed.y.toFixed(1)}%`  
+                }
               }
             }
-          }
-        }}
-      />
+          }}
+        />
+      </div>
     </section>
   ); 
 }

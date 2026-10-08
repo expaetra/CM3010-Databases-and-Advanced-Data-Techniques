@@ -11,7 +11,7 @@ import {
 } from "chart.js";
 
 import { fetchQ4 } from "../api";
-import "./chart.css";
+import "./Chart.css";
 
 ChartJS.register(
   CategoryScale,
@@ -80,7 +80,7 @@ export default function Q4Chart() {
         This chart shows the share of foreign tourists from Schengen and non-Schengen countries over time.
       </p>
 
-      <div style={{ height: "400px" }}> 
+      <div className="chart-area"> 
         <Bar
           data={chartData}
           options={{

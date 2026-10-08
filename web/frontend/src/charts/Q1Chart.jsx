@@ -95,7 +95,7 @@ export default function Q1Chart() {
         </div>
       </div>
 
-      <div style={{ height: "400px" }}>
+      <div className="chart-area">
         <Bar
           data={{
             labels: top10.map(d => d.country_name),

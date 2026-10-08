@@ -13,7 +13,7 @@ import {
 
 // fetch data for question 5 and schengen entry year
 import { fetchQ5, fetchSchengenEntryYear } from "../api";
-import "./chart.css";
+import "./Chart.css";
 
 // fetch Schengen entry year from the database and draw vertical line on that year  
 const verticalLinePlugin = {
@@ -22,7 +22,7 @@ const verticalLinePlugin = {
     const year = chart.options.plugins?.verticalLine?.year; 
     if (!year) return;
 
-    const { ctx, scales, chartArea } =chart;
+    const { ctx, scales, chartArea } = chart;
     const xScale = scales.x; 
     if (!xScale) return;
 
@@ -33,7 +33,7 @@ const verticalLinePlugin = {
     ctx.moveTo(x, chartArea.top);
     ctx.lineTo(x, chartArea.bottom);
     ctx.lineWidth = 1;
-    ctx.strokeStyle ="steelblue";
+    ctx.strokeStyle = "steelblue";
     ctx.stroke();
     ctx.restore();
     ctx.save();
@@ -73,7 +73,7 @@ export default function Q5Chart() {
     // get years and sort them correctly 
     const years = [...new Set(rows.map(r => r.year))].sort((a, b) => a - b);
 
-    // separate coastal and inland country data, convert values & align them year by year
+    // separate coastal and inland county data, convert values & align them year by year
     const coastal = years.map(y =>
       Number(rows.find(r => r.year === y && r.coastal_flag === 1)?.index_value)
     );
@@ -110,57 +110,60 @@ export default function Q5Chart() {
     <section className="chart-card">
       <h2>Indexed growth of tourism activity by county type</h2>
       <p>
-        Tourism arrivals are shown indexed to 2019 as a baseine (100). Hover over a year to see annual growth rates.
+        Tourism arrivals are shown indexed to 2019 as a baseline (100). Hover over a year to see annual growth rates.
       </p>
 
-      <Line
-        data={chartData}
-        options={{
-          responsive: true,
-          interaction: {
-            mode: "index", 
-            intersect: false
-          },
-          scales: {
-            y: {
-              title: {
-                display: true,
-                text: "Index (2019 = 100)"
-              } 
+      <div className="chart-area">
+        <Line
+          data={chartData}
+          options={{
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+              mode: "index", 
+              intersect: false
             },
-            x: {
-              title: {
-                display: true,
-                text: "Year"
+            scales: {
+              y: {
+                title: {
+                  display: true,
+                  text: "Index (2019 = 100)"
+                } 
+              },
+              x: {
+                title: {
+                  display: true,
+                  text: "Year"
+                }
               }
-            }
-          },
-          plugins: {
-            verticalLine: {
-              year: schengenYear
             },
-            tooltip: {
-              callbacks: {
-                label: ctx => {
-                  const data = ctx.dataset.data;
-                  const i = ctx.dataIndex;
-                  const value = ctx.parsed.y;
-                  if (i === 0) {
-                    return `${ctx.dataset.label}: ${value.toFixed(1)} (baseline)`; 
-                  }
-    
-                  const prev = data[i - 1];
-                  const growth = ((value - prev) / prev) * 100;
+            plugins: {
+              verticalLine: {
+                year: schengenYear
+              },
+              tooltip: {
+                callbacks: {
+                  label: ctx => {
+                    const data = ctx.dataset.data;
+                    const i = ctx.dataIndex;
+                    const value = ctx.parsed.y;
+                    if (i === 0) {
+                      return `${ctx.dataset.label}: ${value.toFixed(1)} (baseline)`; 
+                    }
+      
+                    const prev = data[i - 1];
+                    const growth = ((value - prev) / prev) * 100;
 
-                  return `${ctx.dataset.label}: ${value.toFixed(
-                    1
-                  )}  (${growth > 0 ? "+" : ""}${growth.toFixed(1)}%)`;
+                    return `${ctx.dataset.label}: ${value.toFixed(
+                      1
+                    )}  (${growth > 0 ? "+" : ""}${growth.toFixed(1)}%)`;
+                  }
                 }
               }
             }
-          }
-        }}
-      />
+          }}
+        />
+      </div>
     </section>
   );
 }

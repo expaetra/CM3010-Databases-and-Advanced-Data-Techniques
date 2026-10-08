@@ -1,3 +1,13 @@
+.chart-area {
+  position: relative;
+  height: min(52vh, 440px);
+}
+
+.chart-area--half {
+  position: relative;
+  height: min(30vh, 260px);
+}
+
 .chart-card {
   width: 100%;
   background: #ffffff;
