@@ -1,7 +1,11 @@
 const API_BASE = import.meta.env.VITE_API_BASE ?? "";
+const STATIC_DATA = import.meta.env.VITE_STATIC_DATA === "true";
 
 async function fetchJson(path, label) {
-    const res = await fetch(`${API_BASE}${path}`);
+    const url = STATIC_DATA
+        ? `/data${path.replace("/api", "")}.json`
+        : `${API_BASE}${path}`;
+    const res = await fetch(url);
     if (!res.ok) throw new Error(`${label} data fetch failed!`);
     return res.json();
 }
