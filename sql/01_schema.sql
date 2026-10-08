@@ -16,8 +16,8 @@ USE croatian_tourism;
 -- ========== Dimension tables ==========
 
 -- County dimension
--- Represents a Croatian territoral unit (counties + Zagreb)
--- County_id is a surrogate key generated in ETL transfromation stage
+-- Represents a Croatian territorial unit (counties + Zagreb)
+-- County_id is a surrogate key generated in ETL transformation stage
 -- Coastal classification is a derived static attribute that indicates whether a county has a coastline or not
 CREATE TABLE county (
     county_id INT PRIMARY KEY,
@@ -37,7 +37,7 @@ CREATE TABLE country (
 
 -- Time dimension
 -- Represents a monthly time period. Each row corresponds to a unique pair of year and month
--- Surrogate key time_id is geenrated in ETL. UNIQUE ensures the combination appears only once
+-- Surrogate key time_id is generated in ETL. UNIQUE ensures the combination appears only once
 CREATE TABLE time (
     time_id INT PRIMARY KEY,
     year INT NOT NULL,
@@ -51,7 +51,7 @@ CREATE TABLE time (
 
 -- Tourism Observation fact table
 -- Central fact table of the schema: each row represents the number of tourist arrivals for a specific county, country, and month
--- Coomposite primary key enforces the grain of the data & prevents duplicates
+-- Composite primary key enforces the grain of the data & prevents duplicates
 CREATE TABLE tourism_observation (
     county_id INT NOT NULL,
     country_id INT NOT NULL,
@@ -61,7 +61,7 @@ CREATE TABLE tourism_observation (
 ); 
 
 -- Schengen Membership fact table
--- Time-dependant classification of country's Schengen status (indicates whether a country is a member in a given month)
+-- Time-dependent classification of country's Schengen status (indicates whether a country is a member in a given month)
 -- The composite primary key ensures one record per country and a time period
 CREATE TABLE schengen_membership (
     country_id INT NOT NULL,

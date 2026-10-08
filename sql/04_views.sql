@@ -5,7 +5,7 @@ USE croatian_tourism;
 -- Research question: "How does tourist volume vary by country of residence over time?"
 -- Aggregate the fact table at the year x country level
 -- Grain: one row per (year, country_name)
--- measure: total arrivasl (all countries x all months)
+-- measure: total arrivals (all countries x all months)
 
 CREATE OR REPLACE VIEW vw_country_yearly_arrivals AS 
 SELECT
@@ -22,7 +22,7 @@ GROUP BY t.year, c.country_name;
 
 -- ========== Q2: Coastal vs. inland tourism concentration over time ===========
 -- Research question:"How is tourism distributed between coastal and inland counties, and how stable is this distribution over time?
---   Aggregates arrivals at year x coastla_flag level to compare two groups: coastal counties & inland counties
+--   Aggregates arrivals at year x coastal_flag level to compare two groups: coastal counties & inland counties
 --   Grain: one row per (year, coastal_flag) 
 --   Measure: total arrivals(summed across counties within each group)
 
@@ -38,8 +38,8 @@ JOIN county AS c ON f.county_id = c.county_id
 JOIN time AS t ON f.time_id = t.time_id
 GROUP BY t.year, c.coastal_flag; 
 
--- ========== Q2b, focus on stabiity and distribution ==========
--- convert absolute arrivlas into shares (within year percentages)
+-- ========== Q2b, focus on stability and distribution ==========
+-- convert absolute arrivals into shares (within year percentages)
 -- Makes it easier to evaluate, e.g if coastal share stays constant over time = stable distribution, if there is a meaningful change of shares = structural change
 CREATE OR REPLACE VIEW vw_coastal_yearly_share AS 
 SELECT

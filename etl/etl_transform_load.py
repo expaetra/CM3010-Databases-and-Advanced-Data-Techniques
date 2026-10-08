@@ -5,7 +5,7 @@ import pandas as pd
 # ========== Extract ==========
 from etl.extract.load_pxweb import load_pxweb_csv
 
-# ========== Transfrom ==========
+# ========== Transform ==========
 from etl.transform.arrivals import transform_arrivals 
 from etl.transform.time import build_time_dimension
 from etl.transform.county import build_county_dimension

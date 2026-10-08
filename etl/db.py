@@ -2,7 +2,7 @@
 import mysql.connector
 from etl.config import DB_CONFIG 
 
-# Create and return a msql db connection and cursor
+# Create and return a MySQL db connection and cursor
 def get_connection():
     # conn - active connection
     conn = mysql.connector.connect(

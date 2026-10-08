@@ -4,7 +4,7 @@
 ## - Convert the raw csv to utf8 encoding
 ## - Create the database schema, constraints, indexes
 ## - Run the ETL pipeline to load all data
-## - Create database viwes after the data is loaded:
+## - Create database views after the data is loaded:
 
 import subprocess
 import getpass
@@ -58,4 +58,4 @@ run("python -m etl.etl_transform_load")
 run(f"{mysql} < sql/04_views.sql") 
 
 
-print("\nDatabse rebuilt & ETL pipeline completed successfully! ")
+print("\nDatabase rebuilt & ETL pipeline completed successfully! ")

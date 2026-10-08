@@ -1,4 +1,4 @@
-# Build the Schengen memebership fact table - returns country id, time id, and schengen membership flag  
+# Build the Schengen membership fact table - returns country id, time id, and schengen membership flag  
 
 import pandas as pd
 from datetime import date
@@ -10,7 +10,7 @@ def build_schengen_membership(time_df, country_df,entry_df):
     # Loop through countries 
     for _, country in country_df.iterrows(): 
 
-        # FInd the schengen entry data for the country
+        # Find the schengen entry data for the country
         entry = entry_df[entry_df["country_name"]==country.country_name]
 
         # Skip if no Schengen entry date
@@ -22,7 +22,7 @@ def build_schengen_membership(time_df, country_df,entry_df):
             entry.iloc[0]["schengen_start_date"]
         ).date() 
 
-        #Loop thourgh time periods (year - month)
+        #Loop through time periods (year - month)
         for _, t in time_df.iterrows():
 
             # Create first day of the month (the dataset is monthly so the exact date is not relevant)

@@ -1,5 +1,5 @@
 # Construct the county dimension table
-## Extract county names, assign them keys, add flag to speciafy whether they are coastal or inland
+## Extract county names, assign them keys, add flag to specify whether they are coastal or inland
 
 import pandas as pd
 

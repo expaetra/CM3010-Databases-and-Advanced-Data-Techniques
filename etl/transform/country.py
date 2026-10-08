@@ -2,7 +2,7 @@
 ## Extract country names, sort them, assign them country ID
 
 def build_country_dimension(df_long):
-    # Select the 'coutnry' column, remove duplicates, sort
+    # Select the 'country' column, remove duplicates, sort
     country_df = (
         df_long[["country"]].drop_duplicates().sort_values("country").reset_index(drop=True) 
     )

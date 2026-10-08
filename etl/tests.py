@@ -1,7 +1,7 @@
 # ETL test runner to test each step independently:
 ## - Database connectivity
 ## - CSV extraction
-## - Data transfromation
+## - Data transformation
 ## - Database loading
 
 
@@ -11,7 +11,7 @@ from etl.db import get_connection, close_connection
 # ========= Extract ===========
 from extract.load_pxweb import load_pxweb_csv
 
-# ========== Transfrom ==========
+# ========== Transform ==========
 from etl.transform.arrivals import transform_arrivals 
 from etl.transform.country import build_country_dimension
 from etl.transform.county import build_county_dimension 
@@ -25,15 +25,15 @@ from etl.load.load_tourism_observation import load_tourism_observations
 
 
 # ========== helper ==========
-# Retunr the number of rows in the table
+# Return the number of rows in the table
 def table_count(cursor, table):
     cursor.execute(f"SELECT COUNT(*) FROM {table}") 
     return cursor.fetchone()[0]
 
 
 # ========== DB test ==========
-# Check if database conenciton can be established
-# Check if queries cna be executed
+# Check if database connection can be established
+# Check if queries can be executed
 def test_database_connection():
     print("Database connection test... ")
 

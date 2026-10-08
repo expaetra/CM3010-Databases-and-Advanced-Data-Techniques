@@ -48,13 +48,13 @@ def reshape_wide_to_long(df,arrivals_cols):
 
 # Extract year & month values from the period column, enforce data type
 def extract_time_fields(df_long):
-    period = df_long["period"].astype(str) #COnvert to string (pattern extraction)
+    period = df_long["period"].astype(str) #Convert to string (pattern extraction)
 
     # Extract the year & month from the period strings
     df_long["year"] = period.str.extract(r"^(\d{4})") # 4 digits for the year
     df_long["month"] = period.str.extract(r"^\d{4}\s+(\d{2})") # 4 digits to skip the year, add one space, get the next 2 digits = month
 
-    # Conver year, month, & arrivals to numeric
+    # Convert year, month, & arrivals to numeric
     df_long["year"] = pd.to_numeric(df_long["year"], errors="coerce") 
     df_long["month"] = pd.to_numeric(df_long["month"], errors="coerce")
     df_long["arrivals"] = pd.to_numeric(df_long["arrivals"], errors="coerce") 

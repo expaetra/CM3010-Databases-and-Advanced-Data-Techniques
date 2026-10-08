@@ -1,5 +1,5 @@
 -- #------------------ MY CODE --------------------#
--- Create a web suer with appropriate privileges (read-only)
+-- Create a web user with appropriate privileges (read-only)
 
 DROP USER IF EXISTS 'web_user'@'%';
 CREATE USER 'web_user'@'%'

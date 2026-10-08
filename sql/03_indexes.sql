@@ -7,7 +7,7 @@
 USE croatian_tourism;
 
 -- ========== Fact table indexes (tourism_observation) ==========
--- indexes on FKs significanlty improve performance of:
+-- indexes on FKs significantly improve performance of:
 --      - JOIN with dimension tables
 --      - GROUP BY operations
 --      - filtering by county, country, time
