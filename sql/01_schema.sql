@@ -1,6 +1,4 @@
 -- ========= Croatian tourism database schema ==========
--- Define the relational schema for the project. Create all tables and primary keys
-USE croatian_tourism;
 
 -- ========== Database initialization ==========
 -- Drop the database if exists to allow a clean rebuild of the schema.
