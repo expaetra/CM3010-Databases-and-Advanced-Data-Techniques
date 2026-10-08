@@ -1,4 +1,3 @@
--- #------------------ MY CODE --------------------#
 USE croatian_tourism;
 
 -- ========== Q1: Tourist volume by country of residence over time ==========

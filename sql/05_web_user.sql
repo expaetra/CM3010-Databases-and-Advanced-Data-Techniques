@@ -1,4 +1,3 @@
--- #------------------ MY CODE --------------------#
 -- Create a web user with appropriate privileges (read-only)
 
 DROP USER IF EXISTS 'web_user'@'%';
