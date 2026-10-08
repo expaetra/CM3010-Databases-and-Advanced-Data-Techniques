@@ -88,4 +88,4 @@ Prerequisites: MySQL 8, Python 3.10+, Node 18+.
 
 ## About
 
-Data: Croatian Bureau of Statistics (CBS), PX-Web table BS_TU13, 2019–2025 export (December 2025). Built by Petra Ivas.
+Data: Croatian Bureau of Statistics (CBS), PX-Web table BS_TU13, 2019–2025 export (December 2025). Built by [Petra Ivas](https://ivas.is).
