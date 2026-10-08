@@ -3,7 +3,7 @@
 An end-to-end data engineering project: official Croatian tourism statistics are extracted from the Croatian Bureau of Statistics, loaded into a MySQL star schema through a Python ETL pipeline, and served through an Express API to a React dashboard. 
 The analytical focus is what happened to Croatian tourism around the country's accession to the Schengen Area in 2023, a natural experiment on real national data.
 
-<!-- TODO: dashboard screenshot here (capture the Schengen chart) -->
+![Croatian Tourism Dashboard](docs/screenshot.png)
 
 Built as university coursework (BSc Computer Science, University of London), January 2026. The brief set the format; the topic, dataset and research questions are my own.
 
@@ -46,13 +46,13 @@ A star schema with the grain stated explicitly:
 | `country` | dimension | one row per country of residence |
 | `time` | dimension | one row per (year, month) |
 | `tourism_observation` | fact | arrivals per (county, country, month); composite PK enforces the grain |
-| `schengen_membership` | fact | a country's Schengen status per month, modelled as time-dependent to avoid update anomalies |
+| `schengen_membership` | fact | a country's Schengen status per month, modeled as time-dependent to avoid update anomalies |
 
 The SQL is split into numbered stages in [`sql/`](sql): schema, constraints, indexes, views, validation queries, and a read-only `web_user` for the API. Design reasoning, the E/R model and the normalization analysis are in [`docs/design.md`](docs/design.md).
 
 ## What the pipeline handles
 
-- The source table arrives as a wide CSV (1,738 rows x 275 columns) with year and month encoded in column headers; the ETL reshapes it to long format and strips pre-aggregated rows so the warehouse holds one grain only
+- The source table arrives as a wide CSV (the December 2025 export used here: 1,738 rows x 275 columns) with year and month encoded in column headers; the ETL reshapes it to long format and strips pre-aggregated rows so the warehouse holds one grain only
 - Croatian characters: the raw export is re-encoded to UTF-8 and the database uses `utf8mb4`
 - Schengen membership is time-dependent, so it is a fact table keyed by (country, month) rather than a flag on the country dimension
 - Within-year shares and indexed growth are computed in views with window functions, so the API and charts stay thin
@@ -70,6 +70,7 @@ Prerequisites: MySQL 8, Python 3.10+, Node 18+.
    This converts the CSV encoding, creates the schema, constraints, indexes, runs the ETL, and creates the views.
 3. **API:**
    ```bash
+   mysql -u root -p < sql/05_web_user.sql   # create the read-only API user (once)
    cd web/backend
    npm install
    cp .env.example .env     # fill in the DB credentials
@@ -77,7 +78,7 @@ Prerequisites: MySQL 8, Python 3.10+, Node 18+.
    ```
 4. **Dashboard:**
    ```bash
-   cd web/frontend
+   cd ../frontend
    npm install && npm run dev
    ```
 
@@ -87,4 +88,4 @@ Prerequisites: MySQL 8, Python 3.10+, Node 18+.
 
 ## About
 
-Data: Croatian Bureau of Statistics (CBS), PX-Web table BS_TU13, 2019-2025. Built by [Petra Ivas](https://ivas.is).
+Data: Croatian Bureau of Statistics (CBS), PX-Web table BS_TU13, 2019–2025 export (December 2025). Built by Petra Ivas.

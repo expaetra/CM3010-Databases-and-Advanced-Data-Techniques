@@ -25,8 +25,8 @@ mysql = f'mysql -u root -p"{password}"'
 
 # Run a shell command that exits if an error occurs
 def run(cmd):
-    print(f"\n>>> {cmd}")
-    subprocess.run(cmd, shell=True,check=True) 
+    print(f"\n>>> {cmd.replace(password, '*****') if password else cmd}")
+    subprocess.run(cmd, shell=True, check=True)
 
 
 # ========== Step 1 - convert file =========

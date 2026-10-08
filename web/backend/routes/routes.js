@@ -24,9 +24,10 @@ router.get("/api/q1", async (req, res) => {
       "SELECT year,country_name, arrivals FROM vw_country_yearly_arrivals ORDER BY year, arrivals DESC"
     ); 
     res.json(rows);
-  } catch {
+  } catch (err) {
+    console.error(err);
     res.status(500).json({ error: "Q1 data fetch failed!" });
-  } 
+  }
 });
 
 
