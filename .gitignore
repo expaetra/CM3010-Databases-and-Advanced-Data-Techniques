@@ -5,6 +5,7 @@ __pycache__/
 # Data
 data/
 *.csv
+!data/schengen_entry.csv
 
 # Secrets
 .env
