@@ -1,5 +1,7 @@
 # Croatian Tourism Analytics
 
+**Live demo: [tourism.ivas.is](https://tourism.ivas.is)**
+
 An end-to-end data engineering project: official Croatian tourism statistics are extracted from the Croatian Bureau of Statistics, loaded into a MySQL star schema through a Python ETL pipeline, and served through an Express API to a React dashboard. 
 The analytical focus is what happened to Croatian tourism around the country's accession to the Schengen Area in 2023, a natural experiment on real national data.
 
@@ -84,7 +86,9 @@ Prerequisites: MySQL 8, Python 3.10+, Node 18+.
 
 `etl/tests.py` checks each ETL stage independently: connectivity, extraction, each transformation, and the loaded row counts.
 
+## Deployment
 
+The live dashboard is a static build. The published data is a fixed snapshot, so the six views are exported once as JSON and served as plain files behind Caddy, no database or API runs in production. The full stack (MySQL, ETL, Express) runs locally and produced the exported data. A `VITE_STATIC_DATA` flag switches the frontend between the live API (development) and the static files (production build).
 
 ## About
 
